@@ -1,6 +1,6 @@
 package br.com.priscilasanfer.dscatalog.controller;
 
-import br.com.priscilasanfer.dscatalog.entities.Category;
+import br.com.priscilasanfer.dscatalog.dto.CategoryDTO;
 import br.com.priscilasanfer.dscatalog.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class CategoryController {
     private CategoryService service;
 
     @GetMapping
-    public ResponseEntity<List<Category>> findAll() {
+    public ResponseEntity<List<CategoryDTO>> findAll() {
         var  list = service.findAll();
         return ResponseEntity.ok(list);
     }
