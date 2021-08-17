@@ -1,5 +1,6 @@
 package br.com.priscilasanfer.dscatalog.controller.exceptions;
 
+import br.com.priscilasanfer.dscatalog.services.exceptions.DatabaseException;
 import br.com.priscilasanfer.dscatalog.services.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +16,26 @@ public class ResourceExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<StandarError> entityNotFoundException(ResourceNotFoundException e,
                                                                 HttpServletRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
         StandarError error = new StandarError();
         error.setTimestamp(Instant.now());
-        error.setStatus(HttpStatus.NOT_FOUND.value());
+        error.setStatus(status.value());
         error.setError("Resource not found");
         error.setMessage(e.getMessage());
         error.setPath(request.getRequestURI());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        return ResponseEntity.status(status).body(error);
+    }
+
+    @ExceptionHandler(DatabaseException.class)
+    public ResponseEntity<StandarError> databaseException(DatabaseException e,
+                                                                HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandarError error = new StandarError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(status.value());
+        error.setError("Database exception");
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
+        return ResponseEntity.status(status).body(error);
     }
 }

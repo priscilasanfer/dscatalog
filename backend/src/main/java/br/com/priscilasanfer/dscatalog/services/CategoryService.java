@@ -3,8 +3,11 @@ package br.com.priscilasanfer.dscatalog.services;
 import br.com.priscilasanfer.dscatalog.dto.CategoryDTO;
 import br.com.priscilasanfer.dscatalog.entities.Category;
 import br.com.priscilasanfer.dscatalog.repositories.CategoryRepository;
+import br.com.priscilasanfer.dscatalog.services.exceptions.DatabaseException;
 import br.com.priscilasanfer.dscatalog.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,6 +51,17 @@ public class CategoryService {
             return new CategoryDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Categoria com id: " + id + " não encontrada");
+        }
+    }
+
+    public void delete(Long id) {
+        try {
+
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException("Categoria com id: " + id + " não encontrada");
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Integrity violation");
         }
     }
 }
