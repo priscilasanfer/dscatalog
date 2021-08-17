@@ -3,6 +3,7 @@ package br.com.priscilasanfer.dscatalog.services;
 import br.com.priscilasanfer.dscatalog.dto.CategoryDTO;
 import br.com.priscilasanfer.dscatalog.entities.Category;
 import br.com.priscilasanfer.dscatalog.repositories.CategoryRepository;
+import br.com.priscilasanfer.dscatalog.services.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,5 +21,12 @@ public class CategoryService {
     public List<CategoryDTO> findAll() {
         List<Category> categories = repository.findAll();
         return categories.stream().map(CategoryDTO::new).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public CategoryDTO findById(Long id) {
+        Category category = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Categoria com id: " + id + " não encontrada"));
+        return new CategoryDTO(category);
     }
 }
