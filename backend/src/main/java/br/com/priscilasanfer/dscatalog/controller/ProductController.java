@@ -1,11 +1,9 @@
 package br.com.priscilasanfer.dscatalog.controller;
 
-import br.com.priscilasanfer.dscatalog.dto.CategoryDTO;
-import br.com.priscilasanfer.dscatalog.entities.Category;
-import br.com.priscilasanfer.dscatalog.services.CategoryService;
+import br.com.priscilasanfer.dscatalog.dto.ProductDTO;
+import br.com.priscilasanfer.dscatalog.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -14,30 +12,29 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
-@RequestMapping("/categories")
-public class CategoryController {
+@RequestMapping("/products")
+public class ProductController {
 
     @Autowired
-    private CategoryService service;
+    private ProductService service;
 
     @GetMapping
-    public ResponseEntity<Page<CategoryDTO>> findAll(
+    public ResponseEntity<Page<ProductDTO>> findAll(
             @PageableDefault(sort = "name", direction = Sort.Direction.DESC, page = 0, size = 12) Pageable paginacao) {
-        Page<CategoryDTO> list = service.findAll(paginacao );
+        Page<ProductDTO> list = service.findAll(paginacao);
         return ResponseEntity.ok(list);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryDTO> findById (@PathVariable Long id) {
+    public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
         var dto = service.findById(id);
         return ResponseEntity.ok(dto);
     }
 
     @PostMapping
-    public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto) {
+    public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO dto) {
         dto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequestUri()
@@ -49,13 +46,13 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @RequestBody CategoryDTO dto) {
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto) {
         dto = service.update(dto, id);
         return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CategoryDTO> delete(@PathVariable Long id) {
+    public ResponseEntity<ProductDTO> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
