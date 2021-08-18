@@ -54,3 +54,14 @@ INSERT INTO tb_product_category (product_id, category_id) VALUES (22, 3);
 INSERT INTO tb_product_category (product_id, category_id) VALUES (23, 3);
 INSERT INTO tb_product_category (product_id, category_id) VALUES (24, 3);
 INSERT INTO tb_product_category (product_id, category_id) VALUES (25, 3);
+
+INSERT INTO tb_client (name, cpf, birth_date, income, children) VALUES ('Regina Vanessa da Mota', '847.832.144-68', TIMESTAMP WITH TIME ZONE '1950-07-23T10:30:00Z', 2760.00, 0);
+INSERT INTO tb_client (name, cpf, birth_date, income, children) VALUES ('Amanda Camila Pires', '893.145.064-87', TIMESTAMP WITH TIME ZONE '1980-01-16T10:30:00Z', 5839.09, 1);
+INSERT INTO tb_client (name, cpf, birth_date, income, children) VALUES ('Malu Gabriela Castro', '130.488.051-68',TIMESTAMP WITH TIME ZONE  '1968-08-04T10:30:00Z', 17887.09, 0);
+INSERT INTO tb_client (name, cpf, birth_date, income, children) VALUES ('Luzia Rosângela Jaqueline Viana','170.937.389-07',TIMESTAMP WITH TIME ZONE  '1954-09-01T10:30:00Z', 7898.00, 3);
+INSERT INTO tb_client (name, cpf, birth_date, income, children) VALUES ('Luana Lavínia Letícia Farias','830.688.412-40', TIMESTAMP WITH TIME ZONE '1949-08-17T10:30:00Z', 8909.09, 2);
+INSERT INTO tb_client (name, cpf, birth_date, income, children) VALUES ('Milena Sophia da Costa', '436.007.339-90', TIMESTAMP WITH TIME ZONE '1983-12-02T10:30:00Z', 6765.09, 0);
+INSERT INTO tb_client (name, cpf, birth_date, income, children) VALUES ('Isabella Caroline da Mota','258.470.096-40', TIMESTAMP WITH TIME ZONE '1993-03-01T10:30:00Z', 9899.09, 1);
+INSERT INTO tb_client (name, cpf, birth_date, income, children) VALUES ('Rosa Emilly Farias', '394.747.201-34', TIMESTAMP WITH TIME ZONE '1943-10-01T10:30:00Z', 8765.09 , 2);
+INSERT INTO tb_client (name, cpf, birth_date, income, children) VALUES ('Emily Analu Silva', '626.193.304-91', TIMESTAMP WITH TIME ZONE '1971-11-24T10:30:00Z', 2344.00, 0);
+INSERT INTO tb_client (name, cpf, birth_date, income, children) VALUES ('Elza Ayla Monteiro', '018.696.022-00', TIMESTAMP WITH TIME ZONE  '1965-07-18T10:30:00Z', 12222.98, 1);
