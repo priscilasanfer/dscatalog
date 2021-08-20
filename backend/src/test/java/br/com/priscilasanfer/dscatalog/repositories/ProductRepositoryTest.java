@@ -1,7 +1,7 @@
 package br.com.priscilasanfer.dscatalog.repositories;
 
 import br.com.priscilasanfer.dscatalog.entities.Product;
-import br.com.priscilasanfer.dscatalog.factory.ProductFactory;
+import br.com.priscilasanfer.dscatalog.factory.Factory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +46,7 @@ class ProductRepositoryTest {
 
     @Test
     public void saveShouldPersistWithAutoIncrementWhenIdIsNull(){
-        Product product = ProductFactory.createProduct();
+        Product product = Factory.createProduct();
         product.setId(null);
 
         product = repository.save(product);
@@ -68,14 +68,5 @@ class ProductRepositoryTest {
 
         assertTrue(product.isEmpty());
     }
-
-
-    /*
-    findById deveria
-    retornar um Optional<Product> não vazio quando o id existir
-    retornar um Optional<Product> vazio quando o id não existir
-
-     */
-
 
 }
