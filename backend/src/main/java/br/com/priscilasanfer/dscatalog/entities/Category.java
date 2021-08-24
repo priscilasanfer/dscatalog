@@ -5,7 +5,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -23,6 +25,9 @@ public class Category {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 //    @UpdateTimestamp
     private Instant updatedAt;
+
+    @ManyToMany(mappedBy = "categories")
+    Set<Product> products = new HashSet<>();
 
     public Category() { }
 
@@ -53,6 +58,10 @@ public class Category {
 
     public Instant getUpdatedAt() {
         return updatedAt;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
     @PrePersist
