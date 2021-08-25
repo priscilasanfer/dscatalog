@@ -37,10 +37,10 @@ Validação e segurança
 
 - https://oauth.net/2/
 
-![Oauth1](./src/main/resources/files/oauth1.png)  
-![Oauth2](./src/main/resources/files/oauth2.png)
+![Oauth1](./oauth1.png)  
+![Oauth2](./oauth2.png)
 
 
 ## Spring Security (Bean para efetuar autenticação)
 
-![spring-secuity](./src/main/resources/files/spring-secuity)
+![spring-secuity](./spring-secuity.png)

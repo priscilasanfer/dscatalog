@@ -32,7 +32,7 @@ CRUD
 - [Figma do DSCatalog](https://www.figma.com/file/1n0aifcfatWv9ozp16XCrq/DSCatalog-Bootcamp)
 
 ## Modelo conceitual do DSCatalog
-![Modelo Conceitual](./src/main/resources/files/modelo-conceitual-1.png)
+![Modelo Conceitual](./modelo-conceitual-1.png)
 
 ## Collection do Postman
 https://www.getpostman.com/collections/8f7f24addf4ecba59fc1
