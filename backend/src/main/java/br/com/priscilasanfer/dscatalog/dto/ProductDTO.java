@@ -3,6 +3,10 @@ package br.com.priscilasanfer.dscatalog.dto;
 import br.com.priscilasanfer.dscatalog.entities.Category;
 import br.com.priscilasanfer.dscatalog.entities.Product;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +14,16 @@ import java.util.Set;
 
 public class ProductDTO {
     private Long id;
+
+    @Size(min = 4, max = 60, message = "Deve ter entre 5 e 60 caracteres")
+    @NotBlank(message = "Campo requerido")
     private String name;
     private String description;
+    @Positive(message = "O Preço deve ser positivo")
     private Double price;
     private String imgUrl;
+
+    @PastOrPresent(message = "A data não pode ser no futuro")
     private Instant date;
     private List<CategoryDTO> categories = new ArrayList<>();
 

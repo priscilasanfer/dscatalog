@@ -2,13 +2,19 @@ package br.com.priscilasanfer.dscatalog.dto;
 
 import br.com.priscilasanfer.dscatalog.entities.User;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
 public class UserDTO {
     private Long id;
+
+    @NotBlank(message = "Campo Obrigatório")
     private String firstName;
     private String lastName;
+
+    @Email(message = "Por favor, entre com um email válido")
     private String email;
     Set<RoleDTO> roles = new HashSet<>();
 
