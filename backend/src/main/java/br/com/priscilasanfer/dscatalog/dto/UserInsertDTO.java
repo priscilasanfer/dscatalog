@@ -1,5 +1,8 @@
 package br.com.priscilasanfer.dscatalog.dto;
 
+import br.com.priscilasanfer.dscatalog.services.validation.UserInsertValid;
+
+@UserInsertValid
 public class UserInsertDTO extends UserDTO {
     private String password;
 
