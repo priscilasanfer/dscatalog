@@ -3,6 +3,7 @@ package br.com.priscilasanfer.dscatalog.services;
 import br.com.priscilasanfer.dscatalog.dto.RoleDTO;
 import br.com.priscilasanfer.dscatalog.dto.UserDTO;
 import br.com.priscilasanfer.dscatalog.dto.UserInsertDTO;
+import br.com.priscilasanfer.dscatalog.dto.UserUpdateDTO;
 import br.com.priscilasanfer.dscatalog.entities.Role;
 import br.com.priscilasanfer.dscatalog.entities.User;
 import br.com.priscilasanfer.dscatalog.repositories.RoleRepository;
@@ -55,7 +56,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO update(UserDTO dto, Long id) {
+    public UserDTO update(UserUpdateDTO dto, Long id) {
         try {
             User entity = repository.getOne(id);
             copyDtoToEntity(dto, entity);

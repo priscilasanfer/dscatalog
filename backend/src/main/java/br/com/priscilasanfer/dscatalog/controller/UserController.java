@@ -2,6 +2,7 @@ package br.com.priscilasanfer.dscatalog.controller;
 
 import br.com.priscilasanfer.dscatalog.dto.UserDTO;
 import br.com.priscilasanfer.dscatalog.dto.UserInsertDTO;
+import br.com.priscilasanfer.dscatalog.dto.UserUpdateDTO;
 import br.com.priscilasanfer.dscatalog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -48,9 +49,9 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody @Valid UserDTO dto) {
-        dto = service.update(dto, id);
-        return ResponseEntity.ok(dto);
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody @Valid UserUpdateDTO dto) {
+        UserDTO newDto = service.update(dto, id);
+        return ResponseEntity.ok(newDto);
     }
 
     @DeleteMapping("/{id}")
