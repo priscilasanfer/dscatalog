@@ -8,7 +8,6 @@ import br.com.priscilasanfer.dscatalog.repositories.CategoryRepository;
 import br.com.priscilasanfer.dscatalog.repositories.ProductRepository;
 import br.com.priscilasanfer.dscatalog.services.exceptions.DatabaseException;
 import br.com.priscilasanfer.dscatalog.services.exceptions.ResourceNotFoundException;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -29,8 +28,9 @@ public class ProductService {
     private CategoryRepository categoryRepository;
 
     @Transactional(readOnly = true)
-    public Page<ProductDTO> findAll(Pageable pageRequest) {
-        Page<Product> categories = repository.findAll(pageRequest);
+    public Page<ProductDTO> find(Long categoryId, Pageable pageable) {
+        Category category = (categoryId == 0) ? null : categoryRepository.getOne(categoryId);
+        Page<Product> categories = repository.find(category, pageable);
         return categories.map(ProductDTO::new);
     }
 
