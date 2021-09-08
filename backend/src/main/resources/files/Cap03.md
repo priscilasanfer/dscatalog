@@ -44,3 +44,6 @@ Validação e segurança
 ## Spring Security (Bean para efetuar autenticação)
 
 ![spring-secuity](./spring-secuity.png)
+
+## Postman
+- https://www.getpostman.com/collections/8bfc3fa6f14f1a62f94b 

@@ -9,4 +9,4 @@ https://www.figma.com/file/1n0aifcfatWv9ozp16XCrq/DSCatalog-Bootcamp
 
 ### Postman Collection
 
-- https://www.getpostman.com/collections/679591952daca9e5c864
+ - https://www.getpostman.com/collections/8bfc3fa6f14f1a62f94b
