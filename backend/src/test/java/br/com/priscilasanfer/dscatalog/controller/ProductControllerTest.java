@@ -1,5 +1,6 @@
 package br.com.priscilasanfer.dscatalog.controller;
 
+import br.com.priscilasanfer.dscatalog.controller.exceptions.ResourceExceptionHandler;
 import br.com.priscilasanfer.dscatalog.dto.ProductDTO;
 import br.com.priscilasanfer.dscatalog.factory.Factory;
 import br.com.priscilasanfer.dscatalog.services.ProductService;
@@ -9,10 +10,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -25,6 +28,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ProductController.class)
+@AutoConfigureMockMvc(addFilters = false)
+@ContextConfiguration(classes = {ProductController.class, ResourceExceptionHandler.class})
 class ProductControllerTest {
 
     @Autowired
@@ -50,7 +55,7 @@ class ProductControllerTest {
         nonExistingId = 2L;
         dependetId = 3L;
 
-        when(service.findAll(any())).thenReturn(page);
+        when(service.find(eq(0L), any())).thenReturn(page);
         when(service.findById(existingId)).thenReturn(productDto);
         when(service.findById(nonExistingId)).thenThrow(ResourceNotFoundException.class);
         when(service.update(any(), eq(existingId))).thenReturn(productDto);
@@ -66,7 +71,8 @@ class ProductControllerTest {
     public void findAllShouldReturnPage() throws Exception {
         mockMvc.perform(get("/products")
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.totalElements").value("1")); // pq esta mockado a lista so retorna 1
     }
 
     @Test
@@ -75,7 +81,8 @@ class ProductControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
-                .andExpect(jsonPath("$.description").exists());
+                .andExpect(jsonPath("$.description").exists())
+                .andExpect(jsonPath("$.name").value(" The Lord of the Rings"));
     }
 
     @Test
@@ -100,7 +107,7 @@ class ProductControllerTest {
     }
 
     @Test
-    public void updateShouldThrowNotFoundExceptionWhenIdDoesNootExists() throws Exception {
+    public void updateShouldThrowNotFoundExceptionWhenIdDoesNotExists() throws Exception {
         String jsonBody = objectMapper.writeValueAsString(productDto);
 
         mockMvc.perform(put("/products/{id}", nonExistingId)
