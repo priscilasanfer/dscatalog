@@ -52,7 +52,7 @@ public class ProductControllerIT {
     }
 
     @Test
-    public void findAllShouldReturnSortedPageWhenSortByName() throws Exception {
+    public void findWithoutFilterShouldReturnSortedPageWhenSortByName() throws Exception {
         mockMvc.perform(get("/products?page=0&sort=name,asc&size=12")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -100,5 +100,25 @@ public class ProductControllerIT {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void findFilteringByCategoryIdFilterShouldAllProductsFromRequestedCategory() throws Exception {
+        mockMvc.perform(get("/products?categoryId=2")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.totalElements").value(2))
+                .andExpect(jsonPath("$.content").exists())
+                .andExpect(jsonPath("$.content[0].name").value("The Lord of the Rings"))
+                .andExpect(jsonPath("$.content[1].name").value("Rails for Dummies"));
+    }
+
+    @Test
+    public void findFilteringByProductNameFilterShouldAllProductsContainingTheName() throws Exception {
+        mockMvc.perform(get("/products?name=Gamer")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.totalElements").value(21))
+                .andExpect(jsonPath("$.content").exists());
     }
 }

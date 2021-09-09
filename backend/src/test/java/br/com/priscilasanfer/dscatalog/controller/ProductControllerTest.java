@@ -55,7 +55,7 @@ class ProductControllerTest {
         nonExistingId = 2L;
         dependetId = 3L;
 
-        when(service.find(eq(0L), any())).thenReturn(page);
+        when(service.find(eq(0L), eq(""),any())).thenReturn(page);
         when(service.findById(existingId)).thenReturn(productDto);
         when(service.findById(nonExistingId)).thenThrow(ResourceNotFoundException.class);
         when(service.update(any(), eq(existingId))).thenReturn(productDto);
@@ -68,7 +68,7 @@ class ProductControllerTest {
     }
 
     @Test
-    public void findAllShouldReturnPage() throws Exception {
+    public void findWithoutFilterShouldReturnPage() throws Exception {
         mockMvc.perform(get("/products")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

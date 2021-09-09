@@ -63,7 +63,7 @@ class ProductServiceTest {
         doThrow(DatabaseException.class).when(repository).deleteById(dependtId);
 
         //Return something
-        when(repository.findAll((Pageable) ArgumentMatchers.any())).thenReturn(page);
+        when(repository.find(eq(null), eq(""),(Pageable) ArgumentMatchers.any())).thenReturn(page);
         when(repository.save(ArgumentMatchers.any())).thenReturn(product);
         when(repository.findById(existingId)).thenReturn(Optional.of(product));
         when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
@@ -93,12 +93,12 @@ class ProductServiceTest {
     }
 
     @Test
-    public void findAllPageableShouldReturnPage() {
+    public void findPageableWithoutFilterShouldReturnPage() {
         Pageable pageable = PageRequest.of(0, 10);
-        Page<ProductDTO> result = service.find(0L, pageable);
+        Page<ProductDTO> result = service.find(0L, "", pageable);
 
         assertNotNull(result);
-        verify(repository, times(1)).findAll(pageable);
+        verify(repository, times(1)).find(eq(null), eq(""), eq(pageable));
     }
 
     @Test
