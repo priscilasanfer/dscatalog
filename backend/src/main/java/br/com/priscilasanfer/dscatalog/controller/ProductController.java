@@ -24,10 +24,12 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<Page<ProductDTO>> find(
             @RequestParam(value = "categoryId", defaultValue = "0") Long categoryId,
+            @RequestParam(value = "name", defaultValue = "") String name,
             @PageableDefault(sort = "name", direction = Sort.Direction.DESC, page = 0, size = 12) Pageable pageable) {
-        Page<ProductDTO> list = service.find(categoryId, pageable);
+        Page<ProductDTO> list = service.find(categoryId, name.trim(), pageable);
         return ResponseEntity.ok(list);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
