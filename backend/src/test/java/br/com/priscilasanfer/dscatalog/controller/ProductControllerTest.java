@@ -31,6 +31,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc(addFilters = false)
 @ContextConfiguration(classes = {ProductController.class, ResourceExceptionHandler.class})
 class ProductControllerTest {
+    /*
+    Segunda opção para resolver o problema de contexto:
+     - @WebMvcTest(ProductController.class) não carrega td o contexto das classes necessárias
+     - Trocar pela anotação @SpringBootTest
+     - Deixar a anotação @AutoConfigureMockMvc sem parâmetros
+     - Adicionar a classe TokenUtil
+     - adicionar o header authorization nos métodos que precisam de autenticação
+     */
 
     @Autowired
     private MockMvc mockMvc;
