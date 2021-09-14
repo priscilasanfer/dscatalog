@@ -1,6 +1,7 @@
 package br.com.priscilasanfer.dscatalog.controller.exceptions;
 
 import br.com.priscilasanfer.dscatalog.services.exceptions.DatabaseException;
+import br.com.priscilasanfer.dscatalog.services.exceptions.EmailException;
 import br.com.priscilasanfer.dscatalog.services.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,6 +56,19 @@ public class ResourceExceptionHandler {
         for (FieldError f : e.getBindingResult().getFieldErrors()) {
             error.addError(f.getField(), f.getDefaultMessage());
         }
+        return ResponseEntity.status(status).body(error);
+    }
+
+    @ExceptionHandler(EmailException.class)
+    public ResponseEntity<StandarError> emailException(EmailException e,
+                                                                HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandarError error = new StandarError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(status.value());
+        error.setError("Email error");
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
         return ResponseEntity.status(status).body(error);
     }
 }
