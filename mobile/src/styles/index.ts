@@ -5,6 +5,7 @@ const colors = {
     lightGray: "#F2F2F2", 
     mediumGray: "#9E9E9E",
     darkGray: "#263238",
+    borderGrey: "#E1E1E1",
     black: "#000000",
     primary: "#407BEE",
     secondary: "#33569B",
@@ -125,6 +126,29 @@ const theme = StyleSheet.create({
     priceContainer:{
         flexDirection: "row",
         marginTop: 10
+    },
+    inputContainer: {
+        width: '100%', 
+        height: 60,
+        backgroundColor: colors.white,
+        borderRadius: 10,
+        shadowColor: colors.black,
+        shadowOffset:{
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        alignItems: "center",
+        marginVertical:12.5 ,
+        paddingVertical:10 
+    },
+    searchInput:{
+        width: '90%', 
+        height: 40,
+        borderBottomWidth: 0.5,
+        borderBottomColor: colors.borderGrey
+
     }
     
 })
