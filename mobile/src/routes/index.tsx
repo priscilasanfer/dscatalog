@@ -1,6 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {Home, Catalog} from '../pages'
+import {Home, Catalog, ProductDetails} from '../pages'
 
 const Stack = createNativeStackNavigator()
 
@@ -14,6 +14,9 @@ return (
         <Stack.Screen options={{
             headerTitleAlign: "center"
         }} name= "Catalog" component={Catalog}/>
+        <Stack.Screen options={{
+            headerTitleAlign: "center"
+        }} name= "ProductDetails" component={ProductDetails}/>
     </Stack.Navigator>  
 );
 }
